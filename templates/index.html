@@ -2,6 +2,27 @@
 <html>
 <head>
 	<title>🐱 Kitty Weight Form! 🐱</title>
+	<style type="text/css">
+#textboxid
+{
+    height:80px;
+    font-size:28pt;
+}
+#inputlabel
+{
+    font-size:28pt;
+}
+#form-submit-button {
+    background: #0066A2;
+    color: white;
+    border-style: outset;
+    border-color: #0066A2;
+    height: 50px;
+    width: 100px;
+    font: bold15px arial,sans-serif;
+    text-shadow: none;
+}
+	</style>
 </head>
 <body>
 <h1>🐱 Kitty Weight Form! 🐱</h1>
@@ -9,19 +30,19 @@
 <p>Enter the weights below for each kitten in grams and press submit.</p>
 
 <form action="/submit" method="post">
-    <p>Red:&nbsp;<input maxlength="4" name="red" size="4" type="text" /></p>
+<p id="inputlabel"><span style="font-size:36px;">Red</span>:&nbsp;<input id="textboxid" maxlength="4" name="red" size="4" type="text" /></p>
 
-    <p>Orange:&nbsp;<input maxlength="4" name="orange" size="4" type="text" /></p>
+<p id="inputlabel">Orange:&nbsp;<input id="textboxid" maxlength="4" name="orange" size="4" type="text" /></p>
 
-    <p>Yellow:&nbsp;<input maxlength="4" name="yellow" size="4" type="text" /></p>
+<p id="inputlabel">Yellow:&nbsp;<input id="textboxid" maxlength="4" name="yellow" size="4" type="text" /></p>
 
-    <p>Green:&nbsp;<input maxlength="4" name="green" size="4" type="text" /></p>
+<p id="inputlabel">Green:&nbsp;<input id="textboxid" maxlength="4" name="green" size="4" type="text" /></p>
 
-    <p>Blue:&nbsp;<input maxlength="4" name="blue" size="4" type="text" /></p>
+<p id="inputlabel">Blue:&nbsp;<input id="textboxid" maxlength="4" name="blue" size="4" type="text" /></p>
 
-    <p>Purple:&nbsp;<input maxlength="4" name="purple" size="4" type="text" /></p>
+<p id="inputlabel">Purple:&nbsp;<input id="textboxid" maxlength="4" name="purple" size="4" type="text" /></p>
 
-    <p><input name="weight_submit" type="submit" value="Submit" /></p>
+<p><input id="form-submit-button" name="weight_submit" type="submit" value="Submit" /></p>
 </form>
 </body>
 </html>
