@@ -3,10 +3,13 @@
 <head>
 	<title>🐱 Kitty Weight Form! 🐱</title>
 	<style type="text/css">
-#textboxid
+.textboxid
 {
     height:80px;
     font-size:28pt;
+    display: block;
+    border-style: solid;
+    border-width: 5px;
 }
 #inputlabel
 {
@@ -22,6 +25,38 @@
     font: bold15px arial,sans-serif;
     text-shadow: none;
 }
+.red {
+    border-color: #FF0000;
+}
+.orange {
+    border-color: #ff8324;
+}
+.yellow {
+    border-color: #f5d018;
+}
+.green {
+    border-color: #5aeb47;
+}
+.blue {
+    border-color: #276aef;
+}
+.purple {
+    border-color: #8129f5;
+}
+.grid-container {
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
 	</style>
 </head>
 <body>
@@ -30,17 +65,38 @@
 <p>Enter the weights below for each kitten in grams and press submit.</p>
 
 <form action="/submit" method="post">
-<p id="inputlabel"><span style="font-size:36px;">Red</span>:&nbsp;<input id="textboxid" maxlength="4" name="red" size="4" type="text" /></p>
 
-<p id="inputlabel">Orange:&nbsp;<input id="textboxid" maxlength="4" name="orange" size="4" type="text" /></p>
-
-<p id="inputlabel">Yellow:&nbsp;<input id="textboxid" maxlength="4" name="yellow" size="4" type="text" /></p>
-
-<p id="inputlabel">Green:&nbsp;<input id="textboxid" maxlength="4" name="green" size="4" type="text" /></p>
-
-<p id="inputlabel">Blue:&nbsp;<input id="textboxid" maxlength="4" name="blue" size="4" type="text" /></p>
-
-<p id="inputlabel">Purple:&nbsp;<input id="textboxid" maxlength="4" name="purple" size="4" type="text" /></p>
+<div class="grid-container">
+    <div class="grid-item">
+        <p id="inputlabel"><span style="font-size:36px;">Red</span>:&nbsp;
+            <input class="textboxid red" maxlength="4" name="red" size="4" type="text" /></p>
+    </div>
+    <div class="grid-item">
+        <p id="inputlabel">Orange:&nbsp;
+            <input class="textboxid orange" maxlength="4" name="orange" size="4" type="text"/>
+        </p>
+    </div>
+    <div class="grid-item">
+        <p id="inputlabel">Yellow:&nbsp;
+            <input class="textboxid yellow" maxlength="4" name="yellow" size="4" type="text"/>
+        </p>
+    </div>
+    <div class="grid-item">
+        <p id="inputlabel">Green:&nbsp;
+            <input class="textboxid green" maxlength="4" name="green" size="4" type="text"/>
+        </p>
+    </div>
+    <div class="grid-item">
+        <p id="inputlabel">Blue:&nbsp;
+            <input class="textboxid blue" maxlength="4" name="blue" size="4" type="text"/>
+        </p>
+    </div>
+    <div class="grid-item">
+        <p id="inputlabel">Purple:&nbsp;
+            <input class="textboxid purple" maxlength="4" name="purple" size="4" type="text"/>
+        </p>
+    </div>
+</div>
 
 <p><input id="form-submit-button" name="weight_submit" type="submit" value="Submit" /></p>
 </form>
