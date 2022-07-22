@@ -121,13 +121,19 @@ def is_float(element: str):
 
 def kitten_string(weight_difference, time_difference, kitten):
     gain_loss = 'gained' if weight_difference >= 0 else 'lost'
-    return f'{kitten} has {gain_loss} {weight_difference} grams in the last {math.trunc(time_difference)} hours'
+    return f'{kitten} has {gain_loss} {abs(weight_difference)} grams in the last {math.trunc(time_difference)} hours'
 
 def calculate(times, weights: 'list[str]', time_diff):
 
     # clean values
     times = list(map(lambda time:  float(time) if (is_float(time)) else 0, times))
     weights = list(map(lambda weight:  int(weight) if (weight.isnumeric()) else 0, weights))
+
+    # truncate any times that don't have any weights
+    times = times[0 : len(weights)]
+
+    print(f'length of weights: {len(weights)}')
+    print(f'length of times: {len(times)}')
 
     last_weight = 0
     last_weight_idx = 0
