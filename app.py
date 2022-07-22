@@ -1,5 +1,5 @@
 from unicodedata import decimal
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 import datetime
 import pytz
 import gspread
@@ -36,27 +36,26 @@ weights = sheet.get_worksheet(0)
 def index():
     return render_template("index.html")
 
-@app.route('/submit', methods = ['POST'])
-def submit():
-    red = request.form.get("red")
-    orange = request.form.get("orange")
-    yellow = request.form.get("yellow")
-    green = request.form.get("green")
-    blue = request.form.get("blue")
-    purple = request.form.get("purple")
-
-    print(purple)
+@app.route('/weight_submit')
+def weight_submit():
+    
+    red = request.args.get('red')
+    orange = request.args.get('orange')
+    yellow = request.args.get('yellow')
+    green = request.args.get('green')
+    blue = request.args.get('blue')
+    purple = request.args.get('purple')
 
     if red == '' and orange == '' and yellow == '' and green == '' and blue == '' and purple == '':
-        return "Please enter at least one weight!"
+        return "" # no-op
+    else:
+        # Submit elements to Google Sheets
+        now = datetime.datetime.now(pytz.timezone('US/Pacific'))   
+        timestamp = now.strftime("%-m/%d %-I:%M %p") 
+        insertRow = [timestamp, red, orange, yellow, green, blue, purple]
+        weights.append_row(insertRow, value_input_option='USER_ENTERED')        
 
-    # Submit elements to Google Sheets
-    now = datetime.datetime.now(pytz.timezone('US/Pacific'))   
-    timestamp = now.strftime("%-m/%d %-I:%M %p") 
-    insertRow = [timestamp, red, orange, yellow, green, blue, purple]
-    weights.append_row(insertRow, value_input_option='USER_ENTERED')
-
-    return render_template("submit.html")
+    return url_for('profiles')
 
 @app.route('/profiles')
 def profiles():
@@ -121,7 +120,8 @@ def is_float(element: str):
 
 def kitten_string(weight_difference, time_difference, kitten):
     gain_loss = 'gained' if weight_difference >= 0 else 'lost'
-    return f'{kitten} has {gain_loss} {abs(weight_difference)} grams in the last {math.trunc(time_difference)} hours'
+    grams = 'grams' if abs(weight_difference) > 1 else 'gram'
+    return f'{kitten} has {gain_loss} {abs(weight_difference)} {grams} in the last {math.trunc(time_difference)} hours'
 
 def calculate(times, weights: 'list[str]', time_diff):
 
@@ -131,9 +131,6 @@ def calculate(times, weights: 'list[str]', time_diff):
 
     # truncate any times that don't have any weights
     times = times[0 : len(weights)]
-
-    print(f'length of weights: {len(weights)}')
-    print(f'length of times: {len(times)}')
 
     last_weight = 0
     last_weight_idx = 0

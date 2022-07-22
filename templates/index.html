@@ -15,7 +15,7 @@
 {
     font-size:28pt;
 }
-#form-submit-button {
+.form-submit-button {
     background: #0066A2;
     color: white;
     border-style: outset;
@@ -58,47 +58,75 @@
   text-align: center;
 }
 	</style>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+        $(function() {
+          $('a#submit').on('click', function(e) {
+            e.preventDefault()
+            $.ajax({
+                url: "/weight_submit",
+                type: "get",
+                data: { 
+                    red: $('#red').val(),
+                    orange: $('#orange').val(),
+                    yellow: $('#yellow').val(),
+                    green: $('#green').val(),
+                    blue: $('#blue').val(),
+                    purple: $('#purple').val()
+                },
+                success: function(response) {
+                    window.location = response;
+                }
+            });
+          });
+        });
+</script>
 </head>
 <body>
 <h1>🐱 Kitty Weight Form! 🐱</h1>
 
 <p>Enter the weights below for each kitten in grams and press submit.</p>
 
-<form action="/submit" method="post">
+<form>
 
 <div class="grid-container">
     <div class="grid-item">
         <p id="inputlabel"><span style="font-size:36px;">Red</span>:&nbsp;
-            <input class="textboxid red" maxlength="4" name="red" size="4" type="text" /></p>
+            <input id="red" class="textboxid red" maxlength="4" name="red" size="4" type="text" /></p>
     </div>
     <div class="grid-item">
         <p id="inputlabel">Orange:&nbsp;
-            <input class="textboxid orange" maxlength="4" name="orange" size="4" type="text"/>
+            <input id="orange" class="textboxid orange" maxlength="4" name="orange" size="4" type="text"/>
         </p>
     </div>
     <div class="grid-item">
         <p id="inputlabel">Yellow:&nbsp;
-            <input class="textboxid yellow" maxlength="4" name="yellow" size="4" type="text"/>
+            <input id="yellow" class="textboxid yellow" maxlength="4" name="yellow" size="4" type="text"/>
         </p>
     </div>
     <div class="grid-item">
         <p id="inputlabel">Green:&nbsp;
-            <input class="textboxid green" maxlength="4" name="green" size="4" type="text"/>
+            <input id="green" class="textboxid green" maxlength="4" name="green" size="4" type="text"/>
         </p>
     </div>
     <div class="grid-item">
         <p id="inputlabel">Blue:&nbsp;
-            <input class="textboxid blue" maxlength="4" name="blue" size="4" type="text"/>
+            <input id="blue" class="textboxid blue" maxlength="4" name="blue" size="4" type="text"/>
         </p>
     </div>
     <div class="grid-item">
         <p id="inputlabel">Purple:&nbsp;
-            <input class="textboxid purple" maxlength="4" name="purple" size="4" type="text"/>
+            <input id="purple" class="textboxid purple" maxlength="4" name="purple" size="4" type="text"/>
         </p>
     </div>
 </div>
 
-<p><input id="form-submit-button" name="weight_submit" type="submit" value="Submit" /></p>
+ <!-- <p><input id="submit" class="btn btn-default" name="weight_submit" type="submit" value="Submit" /></p> -->
+
+ <br><br>
+
+ <a href=# id=submit><button class='btn btn-default form-submit-button'>Submit</button></a>
 </form>
 </body>
 </html>
+
