@@ -6,6 +6,7 @@ import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import os
 import math
+import json
 
 app = Flask(__name__)
 
@@ -35,6 +36,18 @@ weights = sheet.get_worksheet(0)
 @app.route('/')
 def index():
     return render_template("index.html")
+
+@app.route('/latest_weights')
+def latest_weights():
+
+    return json.dumps({
+        'red': int(weights.col_values(2)[-1]),
+        'orange': int(weights.col_values(3)[-1]),
+        'yellow': int(weights.col_values(4)[-1]),
+        'green': int(weights.col_values(5)[-1]),
+        'blue': int(weights.col_values(6)[-1]),
+        'purple': int(weights.col_values(7)[-1])
+    }) 
 
 @app.route('/weight_submit')
 def weight_submit():

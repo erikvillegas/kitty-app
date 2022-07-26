@@ -60,6 +60,17 @@
 	</style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script type=text/javascript>
+        $(document).ready(function(){
+            $.getJSON("/latest_weights", function(json) {
+                $('#red').attr('placeholder', json['red'])
+                $('#orange').attr('placeholder', json['orange'])
+                $('#yellow').attr('placeholder', json['yellow'])
+                $('#green').attr('placeholder', json['green'])
+                $('#blue').attr('placeholder', json['blue'])
+                $('#purple').attr('placeholder', json['purple'])
+            });
+        });
+
         $(function() {
           $('a#submit').on('click', function(e) {
             e.preventDefault()
@@ -92,7 +103,7 @@
 <div class="grid-container">
     <div class="grid-item">
         <p id="inputlabel"><span style="font-size:36px;">Red</span>:&nbsp;
-            <input id="red" class="textboxid red" maxlength="4" name="red" size="4" type="text" /></p>
+            <input id="red" class="textboxid red" maxlength="4" name="red" size="4" type="text"/></p>
     </div>
     <div class="grid-item">
         <p id="inputlabel">Orange:&nbsp;
