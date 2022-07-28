@@ -58,6 +58,10 @@ def latest_weights():
 
 @app.route('/weight_submit')
 def weight_submit():
+
+    # extremely hacky way to prevent others from using this feature 😵‍💫
+    if request.remote_addr != '45.23.137.9' and request.remote_addr != '127.0.0.1':
+        return
     
     red = request.args.get('red')
     orange = request.args.get('orange')
