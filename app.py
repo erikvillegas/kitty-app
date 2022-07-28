@@ -153,6 +153,15 @@ def profiles():
         'purple': emoji_score(purple_gains_24[0])
     }
 
+    last_weights = {
+        'red': red_weights[-1],
+        'orange': orange_weights[-1],
+        'yellow': yellow_weights[-1],
+        'green': green_weights[-1],
+        'blue': blue_weights[-1],
+        'purple': purple_weights[-1]
+    }
+
     return render_template("profiles.html", 
         red=red_strings, 
         orange=orange_strings, 
@@ -160,7 +169,8 @@ def profiles():
         green=green_strings, 
         blue=blue_strings, 
         purple=purple_strings,
-        scores=scores)
+        scores=scores,
+        last_weights=last_weights)
 
 def is_float(element: str):
     try:
@@ -272,7 +282,7 @@ def average_gains(times, weights):
     strings = []
 
     current_gain = averages[-1][1] - averages[-2][1]
-    strings.append(f'Today: gained {round(current_gain, 1)} grams from yesterday\'s average')
+    strings.append(f'Today: Gained {round(current_gain, 1)} grams from yesterday\'s average')
 
     previous_gain = averages[-2][1] - averages[-3][1]
     previous_day = (datetime.datetime.now() - timedelta(2)).strftime('%A')
