@@ -2,10 +2,11 @@
 <html>
 <head>
 	<title>Cici's Kittens</title>
-	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<style>
 		li {
-			font-size:30px;
+			/* font-size:5vw; */
+			font-size: max(3vw, 5px);
 		}
 	</style>
 </head>
@@ -23,7 +24,14 @@
 {% endfor %}
 </ul>
 
-<iframe width="600" height="400" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQcTShIjFdNQHcVUpLR55KipjvdPfqNZyiVi5jufRJ0ewBC1btjwepCNvvHmskxdnZrF9l9Fjwqxzf/pubchart?oid=153123097&amp;format=interactive"></iframe>
+<!-- <iframe width="600" height="400" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQcTShIjFdNQHcVUpLR55KipjvdPfqNZyiVi5jufRJ0ewBC1btjwepCNvvHmskxdnZrF9l9Fjwqxzf/pubchart?oid=153123097&amp;format=interactive"></iframe> -->
+
+<div>
+	<div style="position:relative;padding-top:56.25%;">
+	  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRQcTShIjFdNQHcVUpLR55KipjvdPfqNZyiVi5jufRJ0ewBC1btjwepCNvvHmskxdnZrF9l9Fjwqxzf/pubchart?oid=153123097&amp;format=interactive" frameborder="0" allowfullscreen
+		style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+	</div>
+  </div>
 
 <br>
 
