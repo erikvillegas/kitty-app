@@ -149,12 +149,12 @@ def profiles():
     ]))
 
     scores = {
-        'red': emoji_score(red_gains_24[0]),
-        'orange': emoji_score(orange_gains_24[0]),
-        'yellow': emoji_score(yellow_gains_24[0]),
-        'green': emoji_score(green_gains_24[0]),
-        'blue': emoji_score(blue_gains_24[0]),
-        'purple': emoji_score(purple_gains_24[0])
+        'red': emoji_score(red_gains_24[0], red_gains_12[0]),
+        'orange': emoji_score(orange_gains_24[0], orange_gains_12[0]),
+        'yellow': emoji_score(yellow_gains_24[0], yellow_gains_12[0]),
+        'green': emoji_score(green_gains_24[0], green_gains_12[0]),
+        'blue': emoji_score(blue_gains_24[0], blue_gains_12[0]),
+        'purple': emoji_score(purple_gains_24[0], purple_gains_12[0])
     }
 
     last_weights = {
@@ -183,14 +183,22 @@ def is_float(element: str):
     except ValueError:
         return False
 
-def emoji_score(gain):
-    if gain >= 14:
+def emoji_score(gain24, gain12):
+    # red alert if gain24 is < 6 OR gain12 < 3
+    # sad face if gain24 is 
+
+    score24 = gain24/14.0
+    score12 = gain12/7.0
+    score_avg = statistics.fmean([score24, score12])
+    print(score_avg)
+
+    if score_avg >= 1:
         return '😎'
-    elif gain >= 12:
+    elif score_avg >= 0.85:
         return '🙂'
-    elif gain >= 10:
+    elif score_avg >= 0.60:
         return '🤔'
-    elif gain >= 6:
+    elif score_avg >= 0.40:
         return '😟'
     else:
         return '🚨'

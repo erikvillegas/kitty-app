@@ -15,14 +15,18 @@
 {
     font-size:28pt;
 }
+input { 
+    text-align: center; 
+}
 .form-submit-button {
     background: #0066A2;
     color: white;
     border-style: outset;
     border-color: #0066A2;
-    height: 50px;
-    width: 100px;
-    font: bold15px arial,sans-serif;
+    height: 80px;
+    width: 510px;
+    font: arial,sans-serif;
+    font-size: 30px;
     text-shadow: none;
 }
 .red {
@@ -62,12 +66,49 @@
 <script type=text/javascript>
         $(document).ready(function(){
             $.getJSON("/latest_weights", function(json) {
+                window.localStorage.setItem('latest_weights', JSON.stringify(json));
+                
                 $('#red').attr('placeholder', json['red'])
                 $('#orange').attr('placeholder', json['orange'])
                 $('#yellow').attr('placeholder', json['yellow'])
                 $('#green').attr('placeholder', json['green'])
                 $('#blue').attr('placeholder', json['blue'])
                 $('#purple').attr('placeholder', json['purple'])
+            });
+
+            function gains(color) {
+                weights = JSON.parse(window.localStorage.getItem('latest_weights'));
+                newWeight = parseInt($('#' + color).val())
+                if (!Number.isNaN(newWeight)) {
+                    var red_gain = parseInt(newWeight) - weights[color]
+                    var symbol = red_gain >= 0 ? '+' : ''
+                    return symbol + red_gain + 'g'
+                }
+                return ''
+            }
+
+            $("#red").blur(function() {
+                $('#red-gain').text(gains('red'))
+            });
+
+            $("#orange").blur(function() {
+                $('#orange-gain').text(gains('orange'))
+            });
+
+            $("#yellow").blur(function() {
+                $('#yellow-gain').text(gains('yellow'))
+            });
+
+            $("#green").blur(function() {
+                $('#green-gain').text(gains('green'))
+            });
+
+            $("#blue").blur(function() {
+                $('#blue-gain').text(gains('blue'))
+            });
+
+            $("#purple").blur(function() {
+                $('#purple-gain').text(gains('purple'))
             });
         });
 
@@ -102,32 +143,45 @@
 
 <div class="grid-container">
     <div class="grid-item">
-        <p id="inputlabel"><span style="font-size:36px;">Red</span>:&nbsp;
-            <input id="red" class="textboxid red" maxlength="4" name="red" size="4" type="text"/></p>
+        <p id="inputlabel">
+            Red:
+            <input id="red" class="textboxid red" maxlength="4" name="red" size="4" type="text"/>
+            <span id="red-gain"></span>
+        </p>
     </div>
     <div class="grid-item">
-        <p id="inputlabel">Orange:&nbsp;
+        <p id="inputlabel">
+            Orange:
             <input id="orange" class="textboxid orange" maxlength="4" name="orange" size="4" type="text"/>
+            <span id="orange-gain"></span>
         </p>
     </div>
     <div class="grid-item">
-        <p id="inputlabel">Yellow:&nbsp;
+        <p id="inputlabel">
+            Yellow:
             <input id="yellow" class="textboxid yellow" maxlength="4" name="yellow" size="4" type="text"/>
+            <span id="yellow-gain"></span>
         </p>
     </div>
     <div class="grid-item">
-        <p id="inputlabel">Green:&nbsp;
+        <p id="inputlabel">
+            Green:
             <input id="green" class="textboxid green" maxlength="4" name="green" size="4" type="text"/>
+            <span id="green-gain"></span>
         </p>
     </div>
     <div class="grid-item">
-        <p id="inputlabel">Blue:&nbsp;
+        <p id="inputlabel">
+            Blue:
             <input id="blue" class="textboxid blue" maxlength="4" name="blue" size="4" type="text"/>
+            <span id="blue-gain"></span>
         </p>
     </div>
     <div class="grid-item">
-        <p id="inputlabel">Purple:&nbsp;
+        <p id="inputlabel">
+            Purple:
             <input id="purple" class="textboxid purple" maxlength="4" name="purple" size="4" type="text"/>
+            <span id="purple-gain"></span>
         </p>
     </div>
 </div>
