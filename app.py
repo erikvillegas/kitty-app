@@ -194,11 +194,11 @@ def emoji_score(gain24, gain12):
 
     if score_avg >= 1:
         return '😎'
-    elif score_avg >= 0.85:
+    elif score_avg >= 0.5:
         return '🙂'
-    elif score_avg >= 0.60:
+    elif score_avg >= 0.3:
         return '🤔'
-    elif score_avg >= 0.40:
+    elif score_avg >= 0.2:
         return '😟'
     else:
         return '🚨'
