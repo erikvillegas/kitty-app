@@ -184,9 +184,6 @@ def is_float(element: str):
         return False
 
 def emoji_score(gain24, gain12):
-    # red alert if gain24 is < 6 OR gain12 < 3
-    # sad face if gain24 is 
-
     score24 = gain24/14.0
     score12 = gain12/7.0
     score_avg = statistics.fmean([score24, score12])
