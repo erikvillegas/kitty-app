@@ -202,9 +202,11 @@ def emoji_score(gain24, gain12):
 
 def format_weight(tuple):
     weight_difference, time_difference = tuple
-    gain_loss = 'Gained' if weight_difference >= 0 else 'Lost'
     grams = 'grams' if abs(weight_difference) > 1 else 'gram'
-    return f'{gain_loss} {abs(weight_difference)} {grams} since weigh-in {math.trunc(time_difference)} hours ago'
+    return f'{gain_loss(weight_difference)} {abs(weight_difference)} {grams} since weigh-in {math.trunc(time_difference)} hours ago'
+
+def gain_loss(difference):
+    return 'Gained' if difference >= 0 else 'Lost'
 
 def calculate_gains(times, weights: 'list[str]', time_diff):
 
@@ -291,15 +293,15 @@ def average_gains(times, weights):
     strings = []
 
     current_gain = averages[-1][1] - averages[-2][1]
-    strings.append(f'Today: Gained {round(current_gain, 1)} grams from yesterday\'s average')
+    strings.append(f'Today: {gain_loss(current_gain)} {abs(round(current_gain, 1))} grams from yesterday\'s average')
 
     previous_gain = averages[-2][1] - averages[-3][1]
     previous_day = (datetime.datetime.now() - timedelta(2)).strftime('%A')
-    strings.append(f'Yesterday: Gained {round(previous_gain, 1)} grams from {previous_day}\'s average')
+    strings.append(f'Yesterday: {gain_loss(previous_gain)} {abs(round(previous_gain, 1))} grams from {previous_day}\'s average')
 
     previous_gain = averages[-3][1] - averages[-4][1]
     previous_previous_day = (datetime.datetime.now() - timedelta(3)).strftime('%A')
-    strings.append(f'{previous_day}: Gained {round(previous_gain, 1)} grams from {previous_previous_day}\'s average')
+    strings.append(f'{previous_day}: {gain_loss(previous_gain)} {abs(round(previous_gain, 1))} grams from {previous_previous_day}\'s average')
     
     window = [
         averages[-1][1] - averages[-2][1],
