@@ -4,9 +4,9 @@
 
 A simple web tool for easily recording weights for kittens (or really, any animal), and understanding their progression. It's one solution for the tricky question of "how is my kitten doing?".
 
-![index.html](screenshots/index.html.png)
+![index.html](screenshots/index.html.png =250x)
 
-![profiles.html](screenshots/profiles.html.png)
+![profiles.html](screenshots/profiles.html.png =250x)
 
 ## How it works
 
