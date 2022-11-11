@@ -1,14 +1,12 @@
-# Project Title
-
-Kitten App
+# Kitten App
 
 ## Description
 
 A simple web tool for easily recording weights for kittens (or really, any animal), and understanding their progression. It's one solution for the tricky question of "how is my kitten doing?".
 
-![index.html](index.html.png)
+![index.html](screenshots/index.html.png)
 
-![profiles.html](profiles.html.png)
+![profiles.html](screenshots/profiles.html.png)
 
 ## How it works
 
