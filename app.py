@@ -28,8 +28,6 @@ google_creds = {
   "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/kitten-tracker%40kittens-356816.iam.gserviceaccount.com"
 }
 
-
-
 scope = ['https://www.googleapis.com/auth/spreadsheets']
 creds = ServiceAccountCredentials.from_json_keyfile_dict(google_creds, scopes=scope)
 client = gspread.authorize(creds)
@@ -57,12 +55,7 @@ def latest_weights():
     }) 
 
 @app.route('/weight_submit')
-def weight_submit():
-
-    # extremely hacky way to prevent others from using this feature 😵‍💫
-    # if request.remote_addr != '45.23.137.9' and request.remote_addr != '127.0.0.1':
-    #     return
-    
+def weight_submit():    
     red = request.args.get('red')
     orange = request.args.get('orange')
     yellow = request.args.get('yellow')
@@ -73,7 +66,7 @@ def weight_submit():
     if red == '' and orange == '' and yellow == '' and green == '' and blue == '' and purple == '':
         return "" # no-op
     else:
-        # Submit elements to Google Sheets
+        # Submit values to Google Sheets
         now = datetime.datetime.now(pytz.timezone('US/Pacific'))   
         timestamp = now.strftime("%-m/%d %-I:%M %p") 
         insertRow = [timestamp, red, orange, yellow, green, blue, purple]
@@ -183,6 +176,7 @@ def is_float(element: str):
     except ValueError:
         return False
 
+# Returns an emoji representing how the kitten is doing based on 12 hour and 24 hour gains
 def emoji_score(gain24, gain12):
     score24 = gain24/14.0
     score12 = gain12/7.0
@@ -236,10 +230,6 @@ def calculate_gains(times, weights: 'list[str]', time_diff):
         if value < abs(matched_time_code) and weight != 0:
             matched_time_code = value
             matched_time_code_idx = index
-            # print(f'closer time code found: {times[matched_time_code_idx]} ({matched_time_code}) -- weight: {weight}')
-
-    # print(f'closest time code: {times[matched_time_code_idx]}')
-    # print(f'matching weight: {weights[matched_time_code_idx]}')
 
     comparison_weight = weights[matched_time_code_idx]
     comparison_weight_code = times[matched_time_code_idx]
@@ -279,17 +269,6 @@ def average_gains(times, weights):
             current_day = math.trunc(value)
             start_idx = idx
 
-    # previous = averages[0][1]
-    # for day, weight in averages[1:]:
-    #     print(f'On day {day} gain was {round(weight - previous)} grams')
-    #     previous = weight
-
-    # def gain(averages, i, j):
-    #     difference = averages[i][1] - averages[j][1]
-    #     symbol = '+' if difference > 0 else '-'
-    #     #return f'{symbol}{round(difference)} grams'
-    #     return difference
-
     strings = []
 
     current_gain = averages[-1][1] - averages[-2][1]
@@ -313,14 +292,7 @@ def average_gains(times, weights):
 
     return strings
 
-    # (w, t) = calculate(time_codes, raw_weights, 3.0)
-    # snapshot_difference = w/3.0
-
-    # print(f'72-hour jump on average is {snapshot_difference}')
-    # print(f'Final 72-hour averages is {snapshot_difference + }')
-
 def flatten(items):
-    """Yield items from any nested iterable; see Reference."""
     for x in items:
         if isinstance(x, Iterable) and not isinstance(x, (str, bytes)):
             for sub_x in flatten(x):

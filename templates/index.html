@@ -2,142 +2,14 @@
 <html>
 <head>
 	<title>🐱 Kitty Weight Form! 🐱</title>
-	<style type="text/css">
-.textboxid
-{
-    height:80px;
-    font-size:28pt;
-    display: block;
-    border-style: solid;
-    border-width: 5px;
-}
-#inputlabel
-{
-    font-size:28pt;
-}
-input { 
-    text-align: center; 
-}
-.form-submit-button {
-    background: #0066A2;
-    color: white;
-    border-style: outset;
-    border-color: #0066A2;
-    height: 80px;
-    width: 510px;
-    font: arial,sans-serif;
-    font-size: 30px;
-    text-shadow: none;
-}
-.red {
-    border-color: #FF0000;
-}
-.orange {
-    border-color: #ff8324;
-}
-.yellow {
-    border-color: #f5d018;
-}
-.green {
-    border-color: #5aeb47;
-}
-.blue {
-    border-color: #276aef;
-}
-.purple {
-    border-color: #8129f5;
-}
-.grid-container {
-  display: inline-grid;
-  grid-template-columns: auto auto auto;
-  background-color: #2196F3;
-  padding: 10px;
-}
-
-.grid-item {
-  background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding: 20px;
-  font-size: 30px;
-  text-align: center;
-}
-	</style>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script type=text/javascript>
-        $(document).ready(function(){
-            $.getJSON("/latest_weights", function(json) {
-                window.localStorage.setItem('latest_weights', JSON.stringify(json));
-                
-                $('#red').attr('placeholder', json['red'])
-                $('#orange').attr('placeholder', json['orange'])
-                $('#yellow').attr('placeholder', json['yellow'])
-                $('#green').attr('placeholder', json['green'])
-                $('#blue').attr('placeholder', json['blue'])
-                $('#purple').attr('placeholder', json['purple'])
-            });
-
-            function gains(color) {
-                weights = JSON.parse(window.localStorage.getItem('latest_weights'));
-                newWeight = parseInt($('#' + color).val())
-                if (!Number.isNaN(newWeight)) {
-                    var red_gain = parseInt(newWeight) - weights[color]
-                    var symbol = red_gain >= 0 ? '+' : ''
-                    return symbol + red_gain + 'g'
-                }
-                return ''
-            }
-
-            $("#red").blur(function() {
-                $('#red-gain').text(gains('red'))
-            });
-
-            $("#orange").blur(function() {
-                $('#orange-gain').text(gains('orange'))
-            });
-
-            $("#yellow").blur(function() {
-                $('#yellow-gain').text(gains('yellow'))
-            });
-
-            $("#green").blur(function() {
-                $('#green-gain').text(gains('green'))
-            });
-
-            $("#blue").blur(function() {
-                $('#blue-gain').text(gains('blue'))
-            });
-
-            $("#purple").blur(function() {
-                $('#purple-gain').text(gains('purple'))
-            });
-        });
-
-        $(function() {
-          $('a#submit').on('click', function(e) {
-            e.preventDefault()
-            $.ajax({
-                url: "/weight_submit",
-                type: "get",
-                data: { 
-                    red: $('#red').val(),
-                    orange: $('#orange').val(),
-                    yellow: $('#yellow').val(),
-                    green: $('#green').val(),
-                    blue: $('#blue').val(),
-                    purple: $('#purple').val()
-                },
-                success: function(response) {
-                    window.location = response;
-                }
-            });
-          });
-        });
-</script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
 </head>
 <body>
 <h1>🐱 Kitty Weight Form! 🐱</h1>
 
-<p>Enter the weights below for each kitten in grams and press submit.</p>
+<h3>Enter the weights below for each kitten in grams and press submit.</h3>
 
 <form>
 

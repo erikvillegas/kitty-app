@@ -1,21 +1,16 @@
 <!doctype html>
-<html style="width: 615px !important;"> <!-- I know.. -->
+<html>
 <head>
 	<title>Cici's Kittens</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<style>
-		li {
-			/* font-size:5vw; */
-			font-size: 25px;
-		}
-	</style>
+	<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
 </head>
 <body>
 <h1>Cici's Kittens</h1>
 
 <br>
 
-<h1 style="color:red; line-height: 0.2em">Red</h1>
+<h1 class="red-heading">Red</h1>
 <h3>Girl – {{ last_weights['red'] }} grams</h3>
 <img src="https://i.imgur.com/iJSQjn7.jpeg" width="300">
 <ul>
@@ -28,7 +23,7 @@
 
 <br>
 
-<h1 style="color:orange; line-height: 0.2em">Orange</h1>
+<h1 class="orange-heading">Orange</h1>
 <h3>Boy – {{ last_weights['orange'] }} grams</h3>
 <img src="https://i.imgur.com/apRoCTT.jpeg" width="300">
 <ul>
@@ -41,7 +36,7 @@
 
 <br>
 
-<h1 style="color:#e4d639; line-height: 0.2em">Yellow</h1>
+<h1 class="yellow-heading">Yellow</h1>
 <h3>Girl – {{ last_weights['yellow'] }} grams</h3>
 <img src="https://i.imgur.com/QcJutzd.png" width="300">
 <ul>
@@ -54,7 +49,7 @@
 
 <br>
 
-<h1 style="color:#21de3a; line-height: 0.2em">Green</h1>
+<h1 class="green-heading">Green</h1>
 <h3>Girl – {{ last_weights['green'] }} grams</h3>
 <img src="https://i.imgur.com/eyFerTW.jpeg" width="300">
 <ul>
@@ -67,7 +62,7 @@
 
 <br>
 
-<h1 style="color:#0088ff; line-height: 0.2em">Blue</h1>
+<h1 class="blue-heading">Blue</h1>
 <h3>Boy – {{ last_weights['blue'] }} grams</h3>
 <img src="https://i.imgur.com/0jVOHDS.jpeg" width="300">
 <ul>
@@ -80,7 +75,7 @@
 
 <br>
 
-<h1 style="color:#b660dd; line-height: 0.2em">Purple</h1>
+<h1 class="purple-heading">Purple</h1>
 <h3>Girl – {{ last_weights['purple'] }} grams</h3>
 <img src="https://i.imgur.com/AniwhkL.jpeg" width="300">
 <ul>
